@@ -5,12 +5,12 @@
   become_user: root
 
 - name: Add apt repository for VAIO camera
-  apt_repository: repo='ppa:r5u87x-loader/ppa' state=present update_cache=yes
+  apt_repository: repo='ppa:r5u87x-loader/ppa' state=present
   become: true
   become_user: root
 
 - name: Install VAIO camera firmware loader
-  apt: name=r5u87x state=present
+  apt: name=r5u87x state=present update_cache=yes cache_valid_time=60
   become: true
   become_user: root
 

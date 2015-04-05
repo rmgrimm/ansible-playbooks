@@ -1,0 +1,10 @@
+---
+keepass2_apt_plugins:
+  - keepass2-plugin-application-indicator
+  # disabled for now: - keepass2-plugin-application-menu
+  - keepass2-plugin-keeagent
+  # disabled for now: - keepass2-plugin-keepasshttp
+keepass2_download_plugins:
+  - { url: "http://sourceforge.net/projects/keepass-favicon/files/latest/download", dest: "FaviconDownloader.plgx", sha256sum: "4d735e514e6c19d00947fc289fc2ee1288bd31541861c504837d089b6258723c" }
+  - { url: "https://raw.github.com/pfn/keepasshttp/master/KeePassHttp.plgx", dest: "KeePassHttp.plgx", sha256sum: "4803ea799962ec3e294691922d6255e63c5a96df36941f99ef633775829e7289" }
+  - { url: "https://www.dropbox.com/s/v1tgki5bccsimck/TrayTOTP.plgx?dl=1", dest: "TrayTOTP.plgx", sha256sum: "284a86e1ac6243747091168506ebf942ca0f58a67608b0235cde54488f5a340f" }
