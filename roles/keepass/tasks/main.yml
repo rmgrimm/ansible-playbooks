@@ -1,0 +1,10 @@
+---
+- name: KeePass repos (Ubuntu)
+  include: ubuntu-repos.yml
+  when: ansible_distribution == "Ubuntu"
+
+# TODO(rgrimm): KeePass repos for other non-Ubuntu Debian variants
+
+- name: KeePass install (Debian-like)
+  include: debian-install.yml
+  when: ansible_os_family == "Debian"

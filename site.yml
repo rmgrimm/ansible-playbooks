@@ -1,8 +1,12 @@
 - name: Set up dynamic groups
   hosts: all
   tasks:
-  - name: Group by distribution
+  - name: Group by OS
     group_by: key="os_{{ ansible_distribution }}"
+    changed_when: false
+
+  - name: Group by OS family
+    group_by: key="os_family_{{ ansible_os_family }}"
     changed_when: false
 
   - name: Group by form factor

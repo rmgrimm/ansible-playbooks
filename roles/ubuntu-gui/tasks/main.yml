@@ -1,6 +1,1 @@
 ---
-- name: Add KeePass PPA
-  apt_repository: repo='ppa:jtaylor/keepass'
-
-- name: Add KeePass plugin PPA
-  apt_repository: repo='ppa:dlech/keepass2-plugins'

@@ -1,5 +1,8 @@
 ---
-- name: Set up webcam
-  hosts: wlvaio
+- hosts: wlvaio:&gui
   roles:
     - vaio-webcam
+
+- hosts: gui
+  roles:
+    - keepass

@@ -1,0 +1,8 @@
+---
+- name: KeePass repositories (Ubuntu PPA)
+  apt_repository: repo="{{ item }}" state=present
+  with_items:
+    - "ppa:jtaylor/keepass"
+    - "ppa:dlech/keepass2-plugins"
+  become: true
+  become_user: root
