@@ -1,0 +1,13 @@
+- name: Set up dynamic groups
+  hosts: all
+  tasks:
+  - name: Group by distribution
+    group_by: key="os_{{ ansible_distribution }}"
+    changed_when: false
+
+  - name: Group by form factor
+    group_by: key="form_{{ ansible_form_factor }}"
+    changed_when: false
+
+- include: gui.yml
+- include: servers.yml

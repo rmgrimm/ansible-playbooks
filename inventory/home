@@ -1,38 +1,12 @@
-[ubuntu-laptops]
+[gui]
 niub30
 reaper-u1404
 reaper2-u1404
 wlvaio
-
-[ubuntu-desktops]
-
-[windows-laptops]
 WL-ENVY
 Reaper
 Reaper2
 MOMS-LAPTOP
-
-[windows-desktops]
-
-[laptops:children]
-ubuntu-laptops
-windows-laptops
-
-[desktops:children]
-ubuntu-desktops
-windows-desktops
-
-[ubuntu-gui:children]
-ubuntu-laptops
-ubuntu-desktops
-
-[windows-gui:children]
-windows-laptops
-windows-desktops
-
-[gui:children]
-ubuntu-gui
-windows-gui
 
 [pepperhood-server-dhcp]
 dispater
@@ -49,13 +23,6 @@ xan
 [pepperhood-server-proxy]
 maelproxy
 
-[pepperhood:children]
-pepperhood-server-dhcp
-pepperhood-server-dns
-pepperhood-server-nas
-pepperhood-server-vpn
-pepperhood-server-proxy
-
 [dhcp-servers:children]
 pepperhood-server-dhcp
 
@@ -70,3 +37,13 @@ pepperhood-server-vpn
 
 [proxy-servers:children]
 pepperhood-server-proxy
+
+[pepperhood-servers:children]
+pepperhood-server-dhcp
+pepperhood-server-dns
+pepperhood-server-nas
+pepperhood-server-vpn
+pepperhood-server-proxy
+
+[servers:children]
+pepperhood-servers

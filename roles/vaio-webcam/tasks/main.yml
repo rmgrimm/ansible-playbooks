@@ -1,0 +1,22 @@
+---
+- name: Install expect to use with firmware loader
+  apt: name=expect state=present
+  become: true
+  become_user: root
+
+- name: Add apt repository for VAIO camera
+  apt_repository: repo='ppa:r5u87x-loader/ppa' state=present update_cache=yes
+  become: true
+  become_user: root
+
+- name: Install VAIO camera firmware loader
+  apt: name=r5u87x state=present
+  become: true
+  become_user: root
+
+- name: Run firmware loader (through expect)
+  command: /usr/bin/expect -c "spawn /usr/share/r5u87x/r5u87x-download-firmware.sh; expect \"y/n\]\"; send \"y\\r\"; wait"
+  args:
+    creates: /usr/lib/r5u87x/ucode/r5u87x-05ca-1839.fw
+  become: true
+  become_user: root

@@ -1,0 +1,5 @@
+---
+- name: Set up webcam
+  hosts: wlvaio
+  roles:
+    - vaio-webcam
