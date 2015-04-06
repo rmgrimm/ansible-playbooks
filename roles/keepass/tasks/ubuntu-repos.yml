@@ -6,3 +6,5 @@
     - "ppa:dlech/keepass2-plugins"
   become: true
   become_user: root
+  tags:
+    - keepass
