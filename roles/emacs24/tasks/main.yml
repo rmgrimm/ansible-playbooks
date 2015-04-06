@@ -1,0 +1,10 @@
+---
+# TODO(rgrimm): Repositories as needed
+
+- name: Emacs24 (on Debian-like)
+  include: debian-install.yml
+  when: ansible_os_family == "Debian"
+
+- name: Emacs24 (on Windows)
+  include: win-install.yml
+  when: false
