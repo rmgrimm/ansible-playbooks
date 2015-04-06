@@ -6,15 +6,41 @@
     - xdotool
   become: true
   become_user: root
+  tags:
+    - keepass
 
 - name: KeePass plugins from apt
   apt: name="{{ item }}" state=present update_cache=yes cache_valid_time=60
   with_items: keepass2_apt_plugins
   become: true
   become_user: root
+  tags:
+    - keepass
 
 - name: KeePass plugins from direct download
   get_url: dest="/usr/lib/keepass2/plugins/{{ item.dest }}" url="{{ item.url }}" sha256sum="{{ item.sha256sum }}" owner=root group=root mode=0644
   with_items: keepass2_download_plugins
   become: true
   become_user: root
+  tags:
+    - keepass
+
+- name: User autostart directory
+  file: path="{{ ansible_user_dir }}/.config/autostart" state=directory mode=0775
+  tags:
+    - keepass
+    - autostart
+
+- name: KeePass autostart desktop item
+  copy: src=/usr/share/applications/keepass2.desktop dest="{{ ansible_user_dir }}/.config/autostart/keepass2.desktop" mode=0644 force=no
+  delegate_to: "{{ inventory_hostname }}"
+  register: keepass2_autostart_copy
+  tags:
+    - keepass
+    - autostart
+
+- name: KeePass autostart activation
+  lineinfile: dest="{{ ansible_user_dir }}/.config/autostart/keepass2.desktop" state=present regexp="^X-GNOME-Autostart-enabled=" line="X-GNOME-Autostart-enabled=true"
+  tags:
+    - keepass
+    - autostart
