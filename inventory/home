@@ -1,12 +1,28 @@
-[gui]
+[pepperhood-windows-gui]
+MOMS-LAPTOP
+Reaper2
+
+[pepperhood-other-gui]
+reaper2-u1404
+
+[biltmore-windows-gui]
+WL-ENVY ansible_ssh_host=10.55.156.101 ansible_ssh_user=faith_000
+Reaper
+
+[biltmore-other-gui]
 niub30
 reaper-u1404
-reaper2-u1404
 wlvaio
-WL-ENVY
-Reaper
-Reaper2
-MOMS-LAPTOP
+
+[windows:children]
+pepperhood-windows-gui
+biltmore-windows-gui
+
+[gui:children]
+pepperhood-windows-gui
+pepperhood-other-gui
+biltmore-windows-gui
+biltmore-other-gui
 
 [pepperhood-server-dhcp]
 dispater
