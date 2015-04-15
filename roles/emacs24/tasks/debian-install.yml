@@ -1,1 +1,62 @@
 ---
+- name: Emacs 24 (from apt)
+  apt: name="{{ item }}" state=present
+  with_items:
+    - emacs24
+    - emacs24-common-non-dfsg
+  become: true
+  become_user: root
+  tags:
+    - emacs
+
+# TODO(rgrimm): Only autostart emacs when in GUI
+
+- name: User autostart directory
+  file: path="{{ emacs_gnome_autostart_dir }}" state=directory mode=0775
+  tags:
+    - emacs
+    - autostart
+
+- name: Emacs server autostart
+  copy: src=/usr/share/applications/emacs24.desktop dest="{{ emacs_gnome_autostart_file }}" mode=0664 force=no
+  delegate_to: "{{ inventory_hostname }}"
+  tags:
+    - emacs
+    - autostart
+
+- name: Emacs server autostart activation
+  lineinfile: dest="{{ emacs_gnome_autostart_file }}" state=present regexp="^X-GNOME-Autostart-enabled=" line="X-GNOME-Autostart-enabled=true"
+  tags:
+    - emacs
+    - autostart
+
+- name: Emacs autostart server only
+  lineinfile: dest="{{ emacs_gnome_autostart_file }}" state=present backrefs=true regexp="^(Exec=\S+)\s+" line="\1 --daemon"
+  tags:
+    - emacs
+    - autostart
+
+- name: User applications directory
+  file: path="{{ emacs_gnome_app_dir }}" state=directory mode=0775
+  tags:
+    - emacs
+    - autostart
+
+- name: Emacsclient (to connect to autostarted)
+  copy: src=/usr/share/applications/emacs24.desktop dest="{{ emacs_gnome_app_file }}" mode=0664 force=no
+  register: emacs_client_copy
+  tags:
+    - emacs
+    - autostart
+
+- name: Emacsclient to actually run emacsclient
+  lineinfile: dest="{{ emacs_gnome_app_file }}" state=present backrefs=true regexp="^(Exec=[^\/]+/)\S+\s+" line="\1emacsclient.emacs24 --alternate-editor=\"\" --create-frame %F"
+  tags:
+    - emacs
+    - autostart
+
+- name: Emacsclient tryexec
+  lineinfile: dest="{{ emacs_gnome_app_file }}" state=present regexp="^TryExec=" line="TryExec=emacsclient.emacs24" insertafter="^Exec="
+  tags:
+    - emacs
+    - autostart

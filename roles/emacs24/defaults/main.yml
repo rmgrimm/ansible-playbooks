@@ -1,0 +1,5 @@
+---
+emacs_gnome_autostart_dir: "{{ ansible_user_dir }}/.config/autostart"
+emacs_gnome_autostart_file: "{{ emacs_gnome_autostart_dir }}/emacs24-server.desktop"
+emacs_gnome_app_dir: "{{ ansible_user_dir }}/.local/share/applications"
+emacs_gnome_app_file: "{{ emacs_gnome_app_dir }}/emacs24.desktop"

@@ -1,5 +1,7 @@
 ---
 apt_cache_time: 60
+keepass_gnome_autostart_dir: "{{ ansible_user_dir }}/.config/autostart"
+keepass_gnome_autostart_file: "{{ keepass_gnome_autostart_dir }}/keepass2.desktop"
 keepass2_apt_plugins:
   - keepass2-plugin-application-indicator
   # disabled for now: - keepass2-plugin-application-menu

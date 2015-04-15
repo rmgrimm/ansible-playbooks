@@ -26,21 +26,20 @@
     - keepass
 
 - name: User autostart directory
-  file: path="{{ ansible_user_dir }}/.config/autostart" state=directory mode=0775
+  file: path="{{ keepass_gnome_autostart_dir }}" state=directory mode=0775
   tags:
     - keepass
     - autostart
 
 - name: KeePass autostart desktop item
-  copy: src=/usr/share/applications/keepass2.desktop dest="{{ ansible_user_dir }}/.config/autostart/keepass2.desktop" mode=0644 force=no
+  copy: src=/usr/share/applications/keepass2.desktop dest="{{ keepass_gnome_autostart_file }}" mode=0644 force=no
   delegate_to: "{{ inventory_hostname }}"
-  register: keepass2_autostart_copy
   tags:
     - keepass
     - autostart
 
 - name: KeePass autostart activation
-  lineinfile: dest="{{ ansible_user_dir }}/.config/autostart/keepass2.desktop" state=present regexp="^X-GNOME-Autostart-enabled=" line="X-GNOME-Autostart-enabled=true"
+  lineinfile: dest="{{ keepass_gnome_autostart_file }}" state=present regexp="^X-GNOME-Autostart-enabled=" line="X-GNOME-Autostart-enabled=true"
   tags:
     - keepass
     - autostart
