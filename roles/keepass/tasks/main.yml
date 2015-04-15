@@ -5,6 +5,6 @@
 
 # TODO(rgrimm): KeePass repos for other non-Ubuntu Debian variants
 
-- name: KeePass install (Debian-like)
+- name: KeePass install (Debian family)
   include: debian-install.yml
   when: ansible_os_family == "Debian"

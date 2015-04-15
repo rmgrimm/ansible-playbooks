@@ -1,3 +1,4 @@
 ---
 dependencies:
 - { role: aptitude }
+- { role: dotnet }

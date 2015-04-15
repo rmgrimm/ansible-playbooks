@@ -1,6 +1,6 @@
 ---
 - name: KeePass from apt
-  apt: name="{{ item }}" state=present update_cache=yes cache_valid_time=60
+  apt: name="{{ item }}" state=present update_cache=yes cache_valid_time="{{ apt_cache_time }}"
   with_items:
     - keepass2
     - xdotool
@@ -10,7 +10,7 @@
     - keepass
 
 - name: KeePass plugins from apt
-  apt: name="{{ item }}" state=present update_cache=yes cache_valid_time=60
+  apt: name="{{ item }}" state=present update_cache=yes cache_valid_time="{{ apt_cache_time }}"
   with_items: keepass2_apt_plugins
   become: true
   become_user: root

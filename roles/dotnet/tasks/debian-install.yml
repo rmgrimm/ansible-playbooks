@@ -1,0 +1,25 @@
+---
+- name: Mono Project apt key
+  apt_key: keyserver="keyserver.ubuntu.com" id="3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+  become: true
+  become_user: root
+  tags:
+    - dotnet
+    - mono
+
+- name: Mono repositories (Wheezy apt)
+  # They only build against wheezy
+  apt_repository: repo="deb http://download.mono-project.com/repo/debian wheezy main" state=present
+  become: true
+  become_user: root
+  tags:
+    - dotnet
+    - mono
+
+- name: Mono from apt
+  apt: name="mono-complete" state=present update_cache=yes cache_valid_time="{{ apt_cache_time }}"
+  become: true
+  become_user: root
+  tags:
+    - dotnet
+    - mono

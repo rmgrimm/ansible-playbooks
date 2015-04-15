@@ -1,4 +1,5 @@
 ---
+apt_cache_time: 60
 keepass2_apt_plugins:
   - keepass2-plugin-application-indicator
   # disabled for now: - keepass2-plugin-application-menu

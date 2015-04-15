@@ -1,0 +1,4 @@
+---
+- name: Mono install (Debian family)
+  include: debian-install.yml
+  when: ansible_os_family == "Debian"
