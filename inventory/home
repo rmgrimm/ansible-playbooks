@@ -1,28 +1,38 @@
-[pepperhood-windows-gui]
+[pepperhood-gui-windows]
 MOMS-LAPTOP
+Reaper
 Reaper2
 
-[pepperhood-other-gui]
-reaper2-u1404
-
-[biltmore-windows-gui]
-WL-ENVY ansible_ssh_host=10.55.156.101 ansible_ssh_user=faith_000
-Reaper
-
-[biltmore-other-gui]
+[pepperhood-gui-other]
 niub30
 reaper-u1404
+reaper2-u1404
+
+[pepperhood-gui:children]
+pepperhood-gui-other
+pepperhood-gui-windows
+
+[biltmore-gui-windows]
+WL-ENVY
+
+[biltmore-gui-other]
 wlvaio
 
-[windows:children]
-pepperhood-windows-gui
-biltmore-windows-gui
+[biltmore-gui:children]
+biltmore-gui-other
+biltmore-gui-windows
+
+[gui-windows:children]
+biltmore-gui-windows
+pepperhood-gui-windows
+
+[gui-other:children]
+biltmore-gui-other
+pepperhood-gui-other
 
 [gui:children]
-pepperhood-windows-gui
-pepperhood-other-gui
-biltmore-windows-gui
-biltmore-other-gui
+gui-windows
+gui-other
 
 [pepperhood-server-dhcp]
 dispater
@@ -39,6 +49,15 @@ xan
 [pepperhood-server-proxy]
 maelproxy
 
+[pepperhood-servers:children]
+pepperhood-server-dhcp
+pepperhood-server-dns
+pepperhood-server-nas
+pepperhood-server-vpn
+pepperhood-server-proxy
+
+[biltmore-servers:children]
+
 [dhcp-servers:children]
 pepperhood-server-dhcp
 
@@ -54,12 +73,13 @@ pepperhood-server-vpn
 [proxy-servers:children]
 pepperhood-server-proxy
 
-[pepperhood-servers:children]
-pepperhood-server-dhcp
-pepperhood-server-dns
-pepperhood-server-nas
-pepperhood-server-vpn
-pepperhood-server-proxy
-
 [servers:children]
+pepperhood-servers
+
+[biltmore:children]
+biltmore-gui
+biltmore-servers
+
+[pepperhood:children]
+pepperhood-gui
 pepperhood-servers

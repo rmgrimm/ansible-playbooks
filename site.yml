@@ -12,7 +12,8 @@
   - name: Group by form factor
     group_by: key="form_{{ ansible_form_factor }}"
     changed_when: false
+    when: ansible_os_family != "Windows"
 
 - include: all.yml
-- include: gui.yml
 - include: servers.yml
+- include: gui.yml

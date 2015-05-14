@@ -1,3 +1,4 @@
 ---
 - name: Ensure aptitude is installed
   apt: name=aptitude state=present
+  when: ansible_os_family == "Debian"
